@@ -9,7 +9,7 @@ class LoginTest extends Simulation{
   // 1 Http Conf
   val httpConf = http.baseUrl(url)
     .acceptHeader("application/json")
-    //Verificar de forma general para todas las solicitudes
+    //Verificar de forma general para todas las solicitudes.
     .check(status.is(200))
 
   // 2 Scenario Definition
