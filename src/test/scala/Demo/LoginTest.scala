@@ -12,7 +12,7 @@ class LoginTest extends Simulation{
     .acceptHeader("application/json")
     //Verificar de forma general para todas las solicitudes.    
 
-  // 2 Scenario Definition
+  // 2 Scenario Definition: Login
   val scn = scenario("Login").
     exec(http("login")
       .post(s"users/login")
@@ -22,6 +22,7 @@ class LoginTest extends Simulation{
       .check(jsonPath("$.token").saveAs("authToken"))
     )
   .pause(1.second)
+  // 3 Scenario Definition: Add Contact
   .exec(
       http("Create Contact")
         .post(s"contacts")
@@ -31,7 +32,7 @@ class LoginTest extends Simulation{
     )
 
 
-  // 3 Load Scenario
+  // 4 Load Scenario
   setUp(
     scn.inject(rampUsers(10).during(50))
   ).protocols(httpConf);
